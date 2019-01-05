@@ -32,7 +32,7 @@ let CryptoJS = require("crypto-js");
     },
     methods:{
       submitData() {
-        this.$axios.post('/api/pad', this.encrypted)
+        this.$axios.post('/api/pad', {data:this.encrypted})
         console.log("sent "+ this.encrypted)
       }
     }

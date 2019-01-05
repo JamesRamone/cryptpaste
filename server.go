@@ -21,7 +21,7 @@ type server struct {
 
 func (s *server) handleIndex() http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
-		http.FileServer(http.Dir("web/public")).ServeHTTP(w, r)
+		http.FileServer(http.Dir("web/dist")).ServeHTTP(w, r)
 	}
 }
 
