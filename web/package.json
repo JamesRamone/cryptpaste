@@ -1,0 +1,25 @@
+{
+  "name": "cryptpad-web",
+  "version": "1.0.0",
+  "description": "My unreal Nuxt.js project",
+  "author": "Jakub Chalupa",
+  "private": true,
+  "scripts": {
+    "dev": "nuxt",
+    "build": "nuxt build",
+    "start": "nuxt start",
+    "generate": "nuxt generate"
+  },
+  "dependencies": {
+    "@nuxtjs/axios": "^5.0.0",
+    "cross-env": "^5.2.0",
+    "crypto-js": "^3.1.9-1",
+    "nuxt": "^2.0.0",
+    "vue-simplemde": "^0.5.1"
+  },
+  "devDependencies": {
+    "nodemon": "^1.11.0",
+    "autoprefixer": "^8.6.4",
+    "tailwindcss": "~0.6.6"
+  }
+}
