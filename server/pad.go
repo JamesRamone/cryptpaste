@@ -4,13 +4,13 @@ import (
 	uuid "github.com/gobuffalo/uuid"
 )
 
-type pad struct {
+type Pad struct {
 	ID   uuid.UUID `json:"id"`
 	Data string    `json:"data"`
 }
 
-func NewPad() *pad {
-	return &pad{
+func NewPad() *Pad {
+	return &Pad{
 		ID:   uuid.Must(uuid.NewV4()),
 		Data: "",
 	}

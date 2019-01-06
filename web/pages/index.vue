@@ -6,7 +6,7 @@
       </h1>
       <markdown-editor v-model="text" ref="markdownEditor"></markdown-editor>
       <input type="text" v-model="pass" id="key">
-      <input type="submit" value="Save" @click.prevent="submitData" class="px-4 py-4 bg-teal-darker rounded text-white">
+      <input type="submit" value="Encrypt & store" @click.prevent="submitData" class="px-4 py-4 bg-teal-darker rounded text-white">
     </div>
   </section>
 </template>
@@ -32,8 +32,10 @@ let CryptoJS = require("crypto-js");
     },
     methods:{
       submitData() {
-        this.$axios.post('/api/pad', {data:this.encrypted})
-        console.log("sent "+ this.encrypted)
+        this.$axios.post('http://localhost:3000/api/pad', {data:this.encrypted})
+        .then(function(response){
+          console.log(response.data);
+        })
       }
     }
   }

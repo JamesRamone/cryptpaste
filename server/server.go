@@ -45,7 +45,7 @@ func (s *server) handleGetPad() http.HandlerFunc {
 				respondHTTPErr(w, r, 404)
 				return errors.New("Not found")
 			}
-			p := &pad{}
+			p := &Pad{}
 			err := json.Unmarshal(v, p)
 			if err != nil {
 				respondHTTPErr(w, r, http.StatusInternalServerError)
