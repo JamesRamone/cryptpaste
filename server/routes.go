@@ -15,7 +15,7 @@ func (s *server) routes() {
 	})
 	s.router.Use(cors.Handler)
 
-	s.router.Get("/api/pad/{id}", s.handleGetPad())
-	s.router.Post("/api/pad", s.handleCreatePad())
+	s.router.Get("/pad/{id}", s.handleGetPad())
+	s.router.Post("/pad", s.handleCreatePad())
 	//s.router.Get("/*", s.handleIndex())
 }
