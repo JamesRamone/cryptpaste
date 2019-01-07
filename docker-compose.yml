@@ -12,6 +12,8 @@ services:
       - "3000"
     command:
       "npm run start"
+    environment:
+      - API_URL="api.cryptpaste.xyz"
     labels:
       - "traefik.docker.network=outside"
       - "traefik.frontend.rule=Host:cryptpaste.xyz"
@@ -23,11 +25,14 @@ services:
     container_name: cryptpaste-server
     restart: always
     networks:
-      - default
+      - outside
     ports:
       - "3000:3000"
     labels:
-      - "traefik.enable=false"
+      - "traefik.docker.network=outside"
+      - "traefik.frontend.rule=Host:api.cryptpaste.xyz"
+      - "traefik.port=3000"
+      - "traefik.enable=true"
 
 networks:
   outside:
