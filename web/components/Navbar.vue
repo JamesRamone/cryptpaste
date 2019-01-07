@@ -1,6 +1,6 @@
 <template>
   <header class="mb-6">
-    <div class="bg-teal skew-4 absolute w-full h-1/2"></div>
+    <div class="header-bg bg-teal clip absolute w-full h-1/2"></div>
     <div class="container mx-auto pt-12">
     <nav class="relative flex justify-between items-center">
       <div>
