@@ -29,6 +29,8 @@
 <script>
 let CryptoJS = require("crypto-js");
 import marked from "marked";
+import axios from "~/plugins/axios";
+
 import Navbar from "~/components/Navbar.vue";
 export default {
     components: {
@@ -36,7 +38,7 @@ export default {
     },
   asyncData({ params, $axios }) {
     return $axios
-      .get(`http://localhost:3000/api/pad/${params.id}`)
+      .get(`/api/pad/${params.id}`)
       .then(res => {
         return { encrypted: res.data.data };
       });

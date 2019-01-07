@@ -5,7 +5,7 @@
       <markdown-editor v-model="text" ref="markdownEditor" :configs="mdeconf"></markdown-editor>
       <div class="flex flex-col-reverse md:flex-row mt-4 align-middle items-center justify-between">
         <div class="mt-6 md:mt-0">Your share link:
-          <a v-bind:href="link">{{ link }}</a>
+          <nuxt-link v-show="link" to="{{ '/pad/'+uuid }}">{{ link }}</nuxt-link>
         </div>
         <div class="inline-flex shadow-md">
           <input
@@ -31,9 +31,10 @@
 
 <script>
 import markdownEditor from "vue-simplemde/src/markdown-editor";
-let CryptoJS = require("crypto-js");
-
 import Navbar from "~/components/Navbar.vue";
+import axios from "~/plugins/axios";
+
+let CryptoJS = require("crypto-js");
 
 export default {
   components: {
@@ -57,7 +58,7 @@ export default {
       return CryptoJS.AES.encrypt(this.text, this.pass).toString();
     },
     link: function() {
-      return this.uuid !== "" ? "http://localhost:3333/pad/" + this.uuid : "";
+      return this.uuid !== "" ? "https://cryptpaste.xyz/pad/" + this.uuid : "";
     },
     enableSubmit: function() {
       return (this.text.length && this.pass.length) && !this.link.length;
@@ -67,7 +68,7 @@ export default {
     submitData() {
       
         this.$axios
-          .post("http://localhost:3000/api/pad", { data: this.encrypted })
+          .post("/api/pad", { data: this.encrypted })
           .then(response => {
             console.log(response);
             this.uuid = response.data;

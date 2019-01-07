@@ -2,7 +2,9 @@ const pkg = require('./package')
 
 module.exports = {
   mode: 'spa',
-
+  env: {
+    apiUrl: process.env.API_URL || 'http://localhost:3000'
+  },
   /*
   ** Headers of the page
   */
