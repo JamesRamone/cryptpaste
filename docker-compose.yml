@@ -13,7 +13,7 @@ services:
     command:
       "npm run start"
     environment:
-      - API_URL="api.cryptpaste.xyz"
+      - API_URL=api.cryptpaste.xyz
     labels:
       - "traefik.docker.network=outside"
       - "traefik.frontend.rule=Host:cryptpaste.xyz"
