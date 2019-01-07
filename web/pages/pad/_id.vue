@@ -1,8 +1,8 @@
 <template>
 <section class="container mx-auto py-4">
-    <input type="text" v-model="key" id="">
+    <input type="text" v-model="key" class="bg-white rounded-sm shadow-outline">
     <input type="submit" value="Decrypt" @click.prevent="decrypt">
-    <div v-html="md" class="border-1 border-grey-dark rounded-sm px-4 py-6"></div>
+    <div v-html="md" v-show="md" class="mt-6 bg-white border-grey-dark border-transparent border-1 rounded-md shadow-md px-4 py-6"></div>
 </section>
 </template>
 
