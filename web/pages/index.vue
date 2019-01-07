@@ -32,7 +32,7 @@
 <script>
 import markdownEditor from "vue-simplemde/src/markdown-editor";
 import Navbar from "~/components/Navbar.vue";
-import axios from "~/plugins/axios";
+// import axios from "~/plugins/axios";
 
 let CryptoJS = require("crypto-js");
 

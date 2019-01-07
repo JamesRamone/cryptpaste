@@ -29,7 +29,7 @@
 <script>
 let CryptoJS = require("crypto-js");
 import marked from "marked";
-import axios from "~/plugins/axios";
+// import axios from "~/plugins/axios";
 
 import Navbar from "~/components/Navbar.vue";
 export default {
