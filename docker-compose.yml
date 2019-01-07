@@ -5,14 +5,30 @@ services:
     build: ./web/
     container_name: cryptpaste-web
     restart: always
+    networks:
+      - default
+      - outside 
     ports:
-      - "80:3000"
+      - "3000"
     command:
       "npm run start"
+    labels:
+      - "traefik.docker.network=outside"
+      - "traefik.frontend.rule=Host:cryptpaste.xyz"
+      - "traefik.port=3000"
+      - "traefik.enable=true"
 
   server:
     build: ./server/
     container_name: cryptpaste-server
     restart: always
+    networks:
+      - default
     ports:
       - "3000:3000"
+    labels:
+      - "traefik.enable=false"
+
+networks:
+  outside:
+    external: true
