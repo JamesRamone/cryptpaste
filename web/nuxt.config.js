@@ -2,9 +2,6 @@ const pkg = require('./package')
 
 module.exports = {
   mode: 'spa',
-  env: {
-    apiUrl: process.env.API_URL || 'http://localhost:3000'
-  },
   /*
   ** Headers of the page
   */
@@ -43,13 +40,18 @@ module.exports = {
   */
   modules: [
     // Doc: https://github.com/nuxt-community/axios-module#usage
-    '@nuxtjs/axios'
+    '@nuxtjs/axios',
+    '@nuxtjs/proxy'
   ],
   /*
   ** Axios module configuration
   */
   axios: {
     // See https://github.com/nuxt-community/axios-module#options
+    proxy: true
+  },
+  proxy: {
+    '/api/*': 'https://api.cryptpaste.xyz/*'
   },
 
   /*
