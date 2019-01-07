@@ -7,9 +7,8 @@ import (
 	"log"
 	"net/http"
 
-	"github.com/gobuffalo/uuid"
-
 	"github.com/go-chi/chi"
+	"github.com/oklog/ulid"
 
 	bolt "go.etcd.io/bbolt"
 )
@@ -33,14 +32,19 @@ func (s *server) handleAPI() http.HandlerFunc {
 
 func (s *server) handleGetPad() http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
-		id, err := uuid.FromString(chi.URLParam(r, "id"))
+		id, err := ulid.Parse(chi.URLParam(r, "id"))
+		if err != nil {
+			respondHTTPErr(w, r, 404)
+			return
+		}
+		idb, err := id.MarshalBinary()
 		if err != nil {
 			respondHTTPErr(w, r, 404)
 			return
 		}
 		s.db.View(func(tx *bolt.Tx) error {
 			b := tx.Bucket([]byte("CryptPad"))
-			v := b.Get(id.Bytes())
+			v := b.Get(idb)
 			if v == nil {
 				respondHTTPErr(w, r, 404)
 				return errors.New("Not found")
@@ -72,9 +76,14 @@ func (s *server) handleCreatePad() http.HandlerFunc {
 			respondHTTPErr(w, r, http.StatusInternalServerError)
 			return
 		}
+		idb, err := p.ID.MarshalBinary()
+		if err != nil {
+			respondHTTPErr(w, r, 500)
+			return
+		}
 		s.db.Update(func(tx *bolt.Tx) error {
 			b := tx.Bucket([]byte("CryptPad"))
-			err := b.Put(p.ID.Bytes(), enc)
+			err := b.Put(idb, enc)
 			if err != nil {
 				respondHTTPErr(w, r, http.StatusInternalServerError)
 				return errors.New("Error storing in database")
