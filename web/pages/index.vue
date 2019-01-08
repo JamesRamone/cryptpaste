@@ -5,7 +5,7 @@
       <markdown-editor v-model="text" ref="markdownEditor" :configs="mdeconf"></markdown-editor>
       <div class="flex flex-col-reverse md:flex-row mt-4 align-middle items-center justify-between">
         <div class="mt-6 md:mt-0">Your share link:
-          <nuxt-link v-show="link" :to="link">{{ link }}</nuxt-link>
+          <nuxt-link v-show="link" :to="suffix">{{ link }}</nuxt-link>
         </div>
         <div class="inline-flex shadow-md">
           <input
@@ -59,6 +59,9 @@ export default {
     },
     link: function() {
       return this.uuid !== "" ? "https://cryptpaste.xyz/pad/" + this.uuid : "";
+    },
+    suffix: function() {
+      return this.uuid !== "" ? "/pad/" + this.uuid : "";
     },
     enableSubmit: function() {
       return (this.text.length && this.pass.length) && !this.link.length;
