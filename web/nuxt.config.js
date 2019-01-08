@@ -1,5 +1,4 @@
 const pkg = require('./package')
-import purgecss from '@fullhuman/postcss-purgecss'
 
 
 module.exports = {
@@ -43,8 +42,7 @@ module.exports = {
   modules: [
     // Doc: https://github.com/nuxt-community/axios-module#usage
     '@nuxtjs/axios',
-    '@nuxtjs/proxy',
-    'nuxt-purgecss',
+    // 'nuxt-purgecss',
   ],
   /*
   ** Axios module configuration
@@ -53,16 +51,15 @@ module.exports = {
     // See https://github.com/nuxt-community/axios-module#options
     // proxy: true
     // baseUrl: 'api.cryptpaste.xyz',
-    browserBaseUrl: 'https://api.cryptpaste.xyz'
   },
   proxy: {
     // '/api': 'https://api.cryptpaste.xyz/'
   },
   
-  purgeCSS: {
-    content: ['./pages/**/*.vue', './layouts/**/*.vue', './components/**/*.vue'],
-    whitelist: ['html', 'body'],
-  },
+  // purgeCSS: {
+  //   content: ['./pages/**/*.vue', './layouts/**/*.vue', './components/**/*.vue'],
+  //   whitelist: ['html', 'body'],
+  // },
   /*
   ** Build configuration
   */
@@ -70,6 +67,7 @@ module.exports = {
     /*
     ** You can extend webpack config here
     */
+  //  extractCSS: true,
     extend(config, ctx) {
      
     }
