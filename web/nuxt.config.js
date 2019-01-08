@@ -1,7 +1,7 @@
 const pkg = require('./package')
 
 module.exports = {
-  mode: 'spa',
+  mode: 'universal',
   /*
   ** Headers of the page
   */
@@ -51,7 +51,7 @@ module.exports = {
     proxy: true
   },
   proxy: {
-    '/api/*': 'https://api.cryptpaste.xyz/*'
+    '/api/*': 'https://api.cryptpaste.xyz/'
   },
 
   /*
