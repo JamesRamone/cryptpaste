@@ -37,10 +37,14 @@ export default {
         Navbar,
     },
   asyncData({ params, $axios }) {
+    var segs = params.id.split('$')
     return $axios
-      .get(`https://api.cryptpaste.xyz/pad/${params.id}`)
+      .get(`https://api.cryptpaste.xyz/pad/${segs[0]}`)
       .then(res => {
-        return { encrypted: res.data.data };
+        return { 
+          encrypted: res.data.data,
+          key: segs[1]
+          };
       });
   },
   data: function() {

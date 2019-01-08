@@ -3,10 +3,18 @@
     <div class="pt-12 pb-24">
       <h1 class="mb-12 font-bold text-4xl text-white">Share your thoughts easily and securely</h1>
       <markdown-editor v-model="text" ref="markdownEditor" :configs="mdeconf"></markdown-editor>
-      <div class="flex flex-col-reverse md:flex-row mt-4 align-middle items-center justify-between">
-        <div class="mt-6 md:mt-0">
-          <span>{{linktext}}</span>
-          <nuxt-link v-show="link" :to="suffix">{{ link }}</nuxt-link>
+      <div class="flex flex-col-reverse md:flex-row mt-8 align-middle items-end justify-between">
+        <div class="mt-6 md:mt-0 flex items-stretch flex-col">
+          <div class="flex justify-between">
+            <div>
+            <input v-show="submitted" type="checkbox" name="addkey" v-model="addkey" class="">
+            <label v-show="submitted">Append key to link</label>
+            </div>
+          </div>
+          <div class="bg-white rounded px-4 py-4 shadow">
+            <nuxt-link v-show="submitted" :to="relurl" class=" no-underline text-teal-dark hover:text-teal-darker mt-4">{{ link }}</nuxt-link>
+            <span v-show="!link" class="text-grey-dark">{{linktext}}</span>
+            </div>
         </div>
         <div class="inline-flex shadow-md">
           <input
@@ -47,6 +55,8 @@ export default {
       text: "",
       pass: "",
       uuid: "",
+      addkey: false,
+      submitted: false,
       mdeconf: {
         toolbar: false,
         status: false,
@@ -59,16 +69,28 @@ export default {
       return CryptoJS.AES.encrypt(this.text, this.pass).toString();
     },
     link: function() {
-      return this.uuid !== "" ? "https://cryptpaste.xyz/pad/" + this.uuid : "";
+      return this.uuid !== "" ? "https://cryptpaste.xyz" + this.relurl : "";
+    },
+    relurl: function() {
+      
+      return this.addkey ? this.suffixkey : this.suffix;
+   
     },
     suffix: function() {
-      return this.uuid !== "" ? "/pad/" + this.uuid : "";
+      
+      return this.uuid !== "" ? "/pad/" + this.uuid  : "";
+ 
+    },
+    suffixkey: function(){
+      if (this.submitted) {
+        return this.suffix + "$" + this.pass;
+      }
     },
     enableSubmit: function() {
       return (this.text.length && this.pass.length) && !this.link.length;
     },
     linktext: function() {
-      if (link === "") {
+      if (this.link === "") {
         return "Store your note to get link."
       } else {
         return "Your link is ready:"
@@ -82,6 +104,7 @@ export default {
           .then(response => {
             console.log(response);
             this.uuid = response.data;
+            this.submitted = true;
           });
       },
   }
