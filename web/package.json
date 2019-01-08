@@ -19,8 +19,9 @@
     "vue-simplemde": "^0.5.1"
   },
   "devDependencies": {
-    "nodemon": "^1.11.0",
+    "@fullhuman/postcss-purgecss": "^1.1.0",
     "autoprefixer": "^8.6.4",
+    "nodemon": "^1.11.0",
     "tailwindcss": "~0.6.6"
   }
 }

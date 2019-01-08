@@ -1,4 +1,6 @@
 const pkg = require('./package')
+import purgecss from '@fullhuman/postcss-purgecss'
+
 
 module.exports = {
   mode: 'spa',
@@ -61,6 +63,14 @@ module.exports = {
     /*
     ** You can extend webpack config here
     */
+   postcss: {
+    plugins: [
+      purgecss({
+        content: ['./pages/**/*.vue', './layouts/**/*.vue', './components/**/*.vue'],
+        whitelist: ['html', 'body'],
+      })
+    ]
+  },
     extend(config, ctx) {
      
     }
