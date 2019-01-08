@@ -4,7 +4,8 @@
       <h1 class="mb-12 font-bold text-4xl text-white">Share your thoughts easily and securely</h1>
       <markdown-editor v-model="text" ref="markdownEditor" :configs="mdeconf"></markdown-editor>
       <div class="flex flex-col-reverse md:flex-row mt-4 align-middle items-center justify-between">
-        <div class="mt-6 md:mt-0">Your share link:
+        <div class="mt-6 md:mt-0">
+          <span>{{linktext}}</span>
           <nuxt-link v-show="link" :to="suffix">{{ link }}</nuxt-link>
         </div>
         <div class="inline-flex shadow-md">
@@ -65,6 +66,13 @@ export default {
     },
     enableSubmit: function() {
       return (this.text.length && this.pass.length) && !this.link.length;
+    },
+    linktext: function() {
+      if (link === "") {
+        return "Store your note to get link."
+      } else {
+        return "Your link is ready:"
+      }
     }
   },
   methods: {
