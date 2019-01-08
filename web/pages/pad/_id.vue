@@ -38,7 +38,7 @@ export default {
     },
   asyncData({ params, $axios }) {
     return $axios
-      .get(`/api/pad/${params.id}`)
+      .get(`https://api.cryptpaste.xyz/pad/${params.id}`)
       .then(res => {
         return { encrypted: res.data.data };
       });

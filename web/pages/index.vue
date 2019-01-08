@@ -5,7 +5,7 @@
       <markdown-editor v-model="text" ref="markdownEditor" :configs="mdeconf"></markdown-editor>
       <div class="flex flex-col-reverse md:flex-row mt-4 align-middle items-center justify-between">
         <div class="mt-6 md:mt-0">Your share link:
-          <nuxt-link v-show="link" to="{{ '/pad/'+uuid }}">{{ link }}</nuxt-link>
+          <nuxt-link v-show="link" :to="link">{{ link }}</nuxt-link>
         </div>
         <div class="inline-flex shadow-md">
           <input
@@ -66,9 +66,8 @@ export default {
   },
   methods: {
     submitData() {
-      
         this.$axios
-          .post("/api/pad", { data: this.encrypted })
+          .post("https://api.cryptpaste.xyz/pad", { data: this.encrypted })
           .then(response => {
             console.log(response);
             this.uuid = response.data;
